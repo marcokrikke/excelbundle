@@ -25,7 +25,7 @@ import java.util.Map;
  * Data class for keeping language files together in a handy package.
  *
  * @author Emil Eriksson
- * @version $Revision: 1.6 $
+ * @version $Revision$
  */
 public class LanguagePack
 {

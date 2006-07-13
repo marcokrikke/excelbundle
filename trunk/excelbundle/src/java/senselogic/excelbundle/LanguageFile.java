@@ -24,7 +24,7 @@ import java.util.Collection;
  * Class for storing data from a language file.
  *
  * @author Emil Eriksson
- * @version $Revision: 1.6 $
+ * @version $Revision$
  */
 public class LanguageFile
 {

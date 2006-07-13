@@ -35,7 +35,7 @@ import org.dom4j.io.SAXReader;
  * Easy to use interface class for exporting Excel files.
  *
  * @author Emil Eriksson
- * @version $Revision: 1.6 $
+ * @version $Revision$
  */
 public class ExportAction
 {
