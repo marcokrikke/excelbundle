@@ -1,45 +1,59 @@
-<html>
-<head>
-<title>Project Home Page</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-</head>
+<h2>excelbundle</h2>
 
-<body bgcolor="#FFFFFF" text="#000000">
-<h1>Default project home page </h1>
-<p>Congratulations on your new java.net project! </p>
-<p>This page is the home page for your new project. This content is appearing 
-  because you have selected the option <b>Use project index.html</b>. To edit 
-  the information displayed on this page, just use CVS to check out your project's 
-  CVS repository and edit index.html in directory www. You can get more information 
-  on how to set-up your local CVS client, click on <b>Version Control</b> on the 
-  left nav bar. </p>
-<p>If you don't want to use CVS to manage your home page, click on the <b>Edit 
-  project</b> link on this page and unclick the option <b>Use project index.html</b>. 
-  Your project home page contents will be generated from the <b>Edit project</b> 
-  field <b>Description</b>. Edit the text on that field to change your home page 
-  contents. Click on <b>Submit changes</b> to save your edits. </p>
-<p>If you are looking for <a href="https://java-net.dev.java.net/ProjectPages.html#templates">sample 
-  home page templates</a>, check out the <a href="https://java-net.dev.java.net/ProjectPages.html">java.net 
-  Project Starter Kit</a>. Copy either of the templates into your project's html 
-  to get started on your project's home page. </p>
-<p>You can find lots of helpful information in the Starter Kit to get your project 
-  started. Some of the things you will find in there include:</p>
+<p><i>Last modified: 2006-07-13</i></p>
+ <br>
+  <br>
+ 
+<h4>Mission Statement</h4>
+<p>To create a useful tool that can ease the translation of Java applications
+for many people.</p> 
+
+ 
+ <br>
+<h4>Background</h4>
+
+<p>In software projects, language translation is often done by non-developers.In 
+Java, strings and other resources are often stored in resource bundles, that
+is, a bunch of .properties files containing the same keys but different values.
+These resource bundles aren't very friendly to the translator.
+
+The solution is excelbundle. excelbundle is a little tool that converts these
+resource bundles to Excel spreadsheets. Excel files are easier for
+non-developers as they probably have Excel installed, and if not, they can use
+OpenOffice.org or such.
+When received back from the translator, excelbundle can merge the result back
+into the source tree.</p>
+
+<br>
+<h4>Project Summary</h4>
+<p>excelbundle uses Apache POI to read and write Excel spreadsheet and uses a
+smart diff algorithm that only changes files with keys that have been changed to
+make it compatible with popular version control systems.
+All comments and newlines are retained in the properties files that already
+exist as excelbundle doesn't use the default Java Properties class for writing.
+</p><p>
+Other features include:
 <ul>
-  <li>Hints on how to <a href="https://java-net.dev.java.net/ProjectPages.html#pages">set-up 
-    your project's</a> home page</li>
-  <li>Ideas on how to <a href="https://java-net.dev.java.net/ProjectPages.html#publicity">publicize 
-    your project</a> including RSS feeds</li>
-  <li>Hints on <a href="https://java-net.dev.java.net/pagedesign.html">project 
-    page HTML</a></li>
-  <li>Setting up project <a href="https://java-net.dev.java.net/ProjectPages.html#wiki">wiki 
-    pages</a></li>
-  <li>And places to go if <a href="https://java-net.dev.java.net/ProjectPages.html#feedback">you 
-    have questions</a>.</li>
-</ul>
-<p>Remember that you will attract more new members and your project team will 
-  work more effectively if you, as the project owner, supply sufficient information 
-  about your project for visitors to your project space. Good luck with your new 
-  project! </p>
-</body>
-</html>
+	<li>export only those keys which are untranslated</li>
+	<li>create a completely new language that doesn't exist yet</li>
+	<li>show statistics on how many keys/files that were
+	    created/changed/deleted</li>
+	<li>pretend mode that does no changes to files on disk but prints out
+	    what would be done</li>
+	<li>ant tasks to automate the exporting and importing</li>
+	<li>excelbundle can map different keys to different sheets in the
+	    workbook depending on what file or directory they're in</li>
+</ul></p>
 
+<br>
+<h4>Files and downloads</h4>
+<p>The latest release, excelbundle 0.9, can be found 
+<a href="https://excelbundle.dev.java.net/servlets/ProjectDocumentList?folderID=5635&expandFolder=5635&folderID=5635">here.</a>
+</p>
+
+<br>
+<h4>Participation</h4>
+
+  <!--This language can be changed!-->
+  <p>For any questions about the project, patches or if you want to participate,
+  send an email to Emil Eriksson, shadewind[at]gmail[dot]com.</p>
