@@ -25,7 +25,7 @@ import java.util.List;
  * Easy to use interface class for importing.
  *
  * @author Emil Eriksson
- * @version $Revision: 1.6 $
+ * @version $Revision$
  */
 public class ImportAction
 {

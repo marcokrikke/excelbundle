@@ -29,7 +29,7 @@ import junit.framework.TestCase;
  * TestCase for Merger.
  *
  * @author Emil Eriksson
- * @version $Revision: 1.6 $
+ * @version $Revision$
  */
 public class MergerTest extends TestCase
 {

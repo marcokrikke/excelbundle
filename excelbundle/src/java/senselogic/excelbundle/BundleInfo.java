@@ -22,7 +22,7 @@ import java.util.Collection;
  * Contains information about a resource bundle.
  *
  * @author Emil Eriksson
- * @version $Revision: 1.6 $
+ * @version $Revision$
  */
 public class BundleInfo
 {

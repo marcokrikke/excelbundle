@@ -22,7 +22,7 @@ import org.apache.tools.ant.ProjectComponent;
  * Sheet mapping type for exportresources ant task.
  *
  * @author Emil Eriksson
- * @version $Revision: 1.6 $
+ * @version $Revision$
  */
 public class SheetMapping extends ProjectComponent
 {

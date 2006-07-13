@@ -20,7 +20,7 @@ package senselogic.excelbundle;
  * Utility class for escaping string for writing to properties files.
  * 
  * @author Emil Eriksson
- * @version $Revision: 1.6 $
+ * @version $Revision$
  */
 public class EscapeUtil
 {

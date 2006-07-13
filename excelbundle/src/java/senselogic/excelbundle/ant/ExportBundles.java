@@ -33,7 +33,7 @@ import senselogic.excelbundle.ExportAction;
  * Ant task for exporting a resources to an Excel file.
  *
  * @author Emil Eriksson
- * @version $Revision: 1.6 $
+ * @version $Revision$
  */
 public class ExportBundles extends Task
 {

@@ -32,7 +32,7 @@ import senselogic.excelbundle.ImportAction;
  * Ant task for importing bundles.
  *
  * @author Emil Eriksson
- * @version $Revision: 1.6 $
+ * @version $Revision$
  */
 public class ImportBundles extends Task
 {

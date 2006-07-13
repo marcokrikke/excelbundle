@@ -39,7 +39,7 @@ import java.util.regex.Pattern;
  * Class for reading and writing LanguagePacks to and from a source tree.
  *
  * @author Emil Eriksson
- * @version $Revision: 1.6 $
+ * @version $Revision$
  */
 public class LanguageTreeIO
 {
