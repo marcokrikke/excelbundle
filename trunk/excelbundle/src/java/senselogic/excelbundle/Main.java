@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,11 +42,7 @@ public class Main
 	private static String strRefLang = "en";
 	private static List<String> strLanguages = new ArrayList<String>();
 	private static List<String> untransList = new ArrayList<String>();
-	private static Map<String, LanguagePack> languages = 
-		new LinkedHashMap<String, LanguagePack>();
 	private static boolean pretend = false;
-	
-	private static LanguageTreeIO tree;
 	
 	// Public --------------------------------------------------------
 	public static void main(String[] args)

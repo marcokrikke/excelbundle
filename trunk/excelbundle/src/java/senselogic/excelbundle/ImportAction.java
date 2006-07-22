@@ -73,7 +73,7 @@ public class ImportAction
 		LanguageTreeIO tree = null;
 		try
 		{
-			tree = new LanguageTreeIO(root);
+			tree = new LanguageTreeIO(root, strRefLang);
 		}
 		catch(IOException e)
 		{
