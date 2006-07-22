@@ -75,7 +75,7 @@ public class MergerTest extends TestCase
 			langFile2.setValue("foo3", "bar4");
 			expect.addLanguageFile(langFile2);
 			
-			LanguageTreeIO tree = new LanguageTreeIO(root);
+			LanguageTreeIO tree = new LanguageTreeIO(root, "en");
 			tree.save(en.getLanguageFile("/foobar1"));
 			tree.save(en.getLanguageFile("/foobar2"));
 			tree.save(sv.getLanguageFile("/foobar1"));

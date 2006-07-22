@@ -49,6 +49,7 @@ public class LanguageTreeIO
 	
     // Attributes ----------------------------------------------------
     private File root;
+    private String refLang;
     private Set<String> languages = new HashSet<String>();
     
     private Map<String, BundleInfo> bundles = 
@@ -62,11 +63,14 @@ public class LanguageTreeIO
     /**
      * Constructs a new LanguageTreeIO.
      *
-     * @param root  the root of the source tree to read language files from
+     * @param root     the root of the source tree to read language files from
+     * @param refLang  the language to use as reference for searching for
+     *                 bundles
      */
-    public LanguageTreeIO(File root) throws IOException
+    public LanguageTreeIO(File root, String refLang) throws IOException
     {
         this.root = root;
+        this.refLang = refLang;
         findBundles(root);
     }
 
@@ -285,9 +289,10 @@ public class LanguageTreeIO
             }
             
             String bundleName = null;
+            String suffix = "_" + refLang + ".properties";
             //We use english language files as a reference for what properties
             //files actually are language files and not other stuff
-            if(file.getName().endsWith("_en.properties") &&
+            if(file.getName().endsWith(suffix) &&
             		!file.isDirectory())
             {
             	String filename = file.getName();
