@@ -115,6 +115,9 @@
 				<include name="examplebuild.xml"/>
 				<include name="sheetmap.xml.example"/>
 			</zipfileset>
+			<zipfileset dir="${dist.dir}" prefix="excelbundle-${version}/">
+				<include name="excelbundle.jar"/>
+			</zipfileset>
 		</zip>
 		
 		<tar
@@ -129,6 +132,9 @@
 			<tarfileset dir="${src.dir}" prefix="excelbundle-${version}/">
 				<include name="examplebuild.xml"/>
 				<include name="sheetmap.xml.example"/>
+			</tarfileset>
+			<tarfileset dir="${dist.dir}" prefix="excelbundle-${version}/">
+				<include name="excelbundle.jar"/>
 			</tarfileset>
 		</tar>
 	</target>
