@@ -23,15 +23,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -125,7 +117,7 @@ public class LanguageTreeIO
     		return langFile;
     	
     	langFile = new LanguageFile(bundlePath, language);
-		Properties prop = new Properties();
+		Properties prop = new CustomProperties();
 		File file = new File(root, langFile.getFilename());
 		if(!file.exists())
 			return null;
