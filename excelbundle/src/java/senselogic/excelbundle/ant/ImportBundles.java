@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DirectoryScanner;
@@ -49,8 +50,7 @@ public class ImportBundles extends Task
 	{
 		strLangList.clear();
 		String[] split = strLangs.split(",");
-		for(String lang : split)
-			strLangList.add(lang);
+      strLangList.addAll(Arrays.asList(split));
 	}
 	
 	public void setRefLang(String refLang)

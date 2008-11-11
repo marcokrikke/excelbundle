@@ -59,11 +59,13 @@ public class EscapeUtil
 			}
 			switch(aChar)
 			{
-				case 'å':
-				case 'ä':
-				case 'ö':
+/* RO: What are these characters??
+				case 'ï¿½':
+				case 'ï¿½':
+				case 'ï¿½':
 					outBuffer.append(aChar);
 					break;
+*/
 				case ' ':
 					if(x == 0 || escapeSpace)
 						outBuffer.append('\\');
