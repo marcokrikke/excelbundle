@@ -15,14 +15,7 @@
  */
 package senselogic.excelbundle;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -42,6 +35,7 @@ public class LanguageTreeIO
     // Attributes ----------------------------------------------------
     private File root;
     private String refLang;
+    private String encoding;
     private Set<String> languages = new HashSet<String>();
     
     private Map<String, BundleInfo> bundles = 
@@ -58,17 +52,21 @@ public class LanguageTreeIO
      * @param root     the root of the source tree to read language files from
      * @param refLang  the language to use as reference for searching for
      *                 bundles
+     * @param anEncoding encoding of the property files
+     * @throws java.io.IOException
      */
-    public LanguageTreeIO(File root, String refLang) throws IOException
+    public LanguageTreeIO(File root, String refLang, String anEncoding) throws IOException
     {
         this.root = root;
         this.refLang = refLang;
+        encoding = anEncoding;
         findBundles(root);
     }
 
     // Public --------------------------------------------------------
     /**
      * Returns the root of this LanguageTreeIO.
+     * @return
      */
     public File getRoot()
     {
@@ -78,6 +76,7 @@ public class LanguageTreeIO
     /**
      * Returns a Collection of all the languages that are available in at least
      * one bundle.
+     * @return
      */
     public Collection<String> getAvailableLanguages()
     {
@@ -86,6 +85,8 @@ public class LanguageTreeIO
     
     /**
      * Returns the BundleInfo with the specified path.
+     * @param path
+     * @return
      */
     public BundleInfo getBundle(String path)
     {
@@ -95,6 +96,7 @@ public class LanguageTreeIO
     /**
      * Returns a Collection of BundleInfo objects describing all of the
      * available bundles.
+     * @return
      */
     public Collection<BundleInfo> getBundles()
     {
@@ -107,6 +109,8 @@ public class LanguageTreeIO
      * @param bundlePath  the relative logical path to the bundle, e.g.
      *                    bla/bla/mybundle
      * @param language    the language of the file
+     * @return
+     * @throws java.io.IOException
      */
     public LanguageFile loadLanguageFile(String bundlePath, String language)
     	throws IOException
@@ -121,8 +125,25 @@ public class LanguageTreeIO
 		File file = new File(root, langFile.getFilename());
 		if(!file.exists())
 			return null;
-		
-		prop.load(new FileInputStream(file));
+
+       Reader reader = null;
+       InputStream inputStream = null;
+       try
+       {
+          inputStream = new FileInputStream(file);
+          reader = new InputStreamReader(inputStream, encoding);
+          prop.load(reader);
+       } catch (NoSuchMethodError e)
+       {
+          if (!"ISO-8859-1".equals(encoding))
+            System.out.println("Java version prior to 1.5 makes -enc obsolete. Fallbacks to ISO-8859-1");
+          // java < 1.6 fallback
+          prop.load(inputStream);
+       } finally
+       {
+          if (reader != null) reader.close();
+          if (inputStream != null) inputStream.close();
+       }
 		
 		for(Map.Entry<Object, Object> entry : prop.entrySet())
 			langFile.setValue((String)entry.getKey(), (String)entry.getValue());
@@ -135,6 +156,9 @@ public class LanguageTreeIO
      * Loads all the language files associated with the specified language and
      * returns them as a LanguagePack. This method caches the read file so
      * subsequent calls to this method will not read the file multiple times.
+     * @param language
+     * @return
+     * @throws java.io.IOException
      */
     public LanguagePack loadLanguage(String language) throws IOException
     {
@@ -170,13 +194,30 @@ public class LanguageTreeIO
 	    	Properties prop = new Properties();
 	    	for(LanguageFile.KeyValuePair pair : langFile.getPairs())
 	    		prop.put(pair.getKey(), pair.getValue());
-	    	
-	    	prop.store(new FileOutputStream(file), null);
+
+          Writer writer = null;
+          OutputStream outputStream = null;
+          try
+          {
+             outputStream = new FileOutputStream(file);
+             writer = new OutputStreamWriter(outputStream, encoding);
+             prop.store(writer, null);
+          } catch (NoSuchMethodError e)
+          {
+             if (!"ISO-8859-1".equals(encoding))
+                System.out.println("Java version prior to 1.5 makes -enc obsolete. Fallbacks to ISO-8859-1");
+             // java < 1.6 fallback
+             prop.store(outputStream, null);
+          } finally
+          {
+             if (writer != null) writer.close();
+             if (outputStream != null) outputStream.close();
+          }
 	    	return;
     	}
-    	
+
     	BufferedReader in = new BufferedReader(new InputStreamReader(
-    			new FileInputStream(file), "ISO-8859-1"));
+    			new FileInputStream(file), encoding));
     	List<String> lines = new ArrayList<String>();
     	try
     	{
@@ -188,9 +229,9 @@ public class LanguageTreeIO
     	{
     		in.close();
     	}
-    	
+
     	PrintStream out = new PrintStream(
-    			new FileOutputStream(file), false, "ISO-8859-1");
+    			new FileOutputStream(file), false, encoding);
     	try
     	{
     		//This is used to keep track of what keys remain to be written in 

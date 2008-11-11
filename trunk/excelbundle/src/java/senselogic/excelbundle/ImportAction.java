@@ -35,6 +35,7 @@ public class ImportAction
 	private File root;
 	private File inputFile;
 	private boolean pretend = false;
+   private String encoding;
 	
     // Public --------------------------------------------------------
 	public void setLanguages(List<String> strLanguages)
@@ -61,19 +62,25 @@ public class ImportAction
 	{
 		this.pretend = pretend;
 	}
-	
-	/**
+
+   public void setEncoding(String anEncoding)
+   {
+      encoding = anEncoding;
+   }
+
+   /**
 	 * Import with the current settings.
 	 * 
 	 * @param out  what stream to print information and statistics about the
 	 *             import to or null if silenced
+    * @throws java.io.IOException
 	 */
 	public void doImport(PrintStream out) throws IOException
 	{
-		LanguageTreeIO tree = null;
+		LanguageTreeIO tree;
 		try
 		{
-			tree = new LanguageTreeIO(root, strRefLang);
+			tree = new LanguageTreeIO(root, strRefLang, encoding);
 		}
 		catch(IOException e)
 		{
@@ -83,7 +90,7 @@ public class ImportAction
 			throw e2;
 		}
 		
-		LanguagePack refLang = null;
+		LanguagePack refLang;
 		try
 		{
 			refLang = tree.loadLanguage(strRefLang);
@@ -96,7 +103,7 @@ public class ImportAction
 			throw e2;
 		}
 		
-		ExcelImporter importer = null;
+		ExcelImporter importer;
 		try
 		{
 			importer = new ExcelImporter(inputFile);

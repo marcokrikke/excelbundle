@@ -44,7 +44,7 @@ public class LanguageTreeIOTest extends TestCase
 	public void setUp() throws IOException
 	{
 		langTree = 
-			new LanguageTreeIO(new File("src/test/").getCanonicalFile(), "en");
+			new LanguageTreeIO(new File("src/test/").getCanonicalFile(), "en", "ISO-8859-1");
 		testFile = new File(langTree.getRoot(), "writetest_no.properties");
 	}
 	

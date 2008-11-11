@@ -18,10 +18,7 @@ package senselogic.excelbundle.ant;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
@@ -61,8 +58,7 @@ public class ExportBundles extends Task
 	{
 		strLangList.clear();
 		String[] split = strLangs.split(",");
-		for(String lang : split)
-			strLangList.add(lang);
+      strLangList.addAll(Arrays.asList(split));
 	}
 	
 	public void setRefLang(String refLang)
@@ -79,8 +75,7 @@ public class ExportBundles extends Task
 	{
 		strUntransList.clear();
 		String[] split = strUntrans.split(",");
-		for(String lang : split)
-			strUntransList.add(lang);
+      strUntransList.addAll(Arrays.asList(split));
 	}
 	
 	public void addConfiguredSheetmapping(SheetMapping mapping)

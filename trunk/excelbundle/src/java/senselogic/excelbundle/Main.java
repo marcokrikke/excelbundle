@@ -16,14 +16,11 @@
 
 package senselogic.excelbundle;
 
+import org.dom4j.DocumentException;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.dom4j.DocumentException;
+import java.util.*;
 
 /**
  * Command line interface.
@@ -43,8 +40,9 @@ public class Main
 	private static List<String> strLanguages = new ArrayList<String>();
 	private static List<String> untransList = new ArrayList<String>();
 	private static boolean pretend = false;
-	
-	// Public --------------------------------------------------------
+   private static String encoding = "ISO-8859-1";
+
+   // Public --------------------------------------------------------
 	public static void main(String[] args)
 	{
 		if(args.length == 0)
@@ -96,16 +94,16 @@ public class Main
 				"   -m      - Specifies a sheet map file to use. A sheet map file can be used to\n" + 
 				"             categorize different bundles into different sheet of the workbook\n" + 
 				"             in the resulting Excel spreadsheet. An example is provided in the\n" + 
-				"             sheetmap.xml.sample file included in the root of the distribution.");
-	}
+				"             sheetmap.xml.sample file included in the root of the distribution." +
+            "   -enc    - Specifies the encoding of the property files. This feature is only\n" +
+            "             available in java 1.6 and above. Defaults to ISO-8859-1");
+   }
 	
 	private static void parseArgs(String[] argsArray)
 	{
 		//Add stuff to an ArrayList for easier handling
-		List<String> args = new ArrayList<String>();
-		for(String arg : argsArray)
-			args.add(arg);
-		
+		List<String> args = Arrays.asList(argsArray);
+
 		Iterator<String> it = args.iterator();
 		while(it.hasNext())
 		{
@@ -151,8 +149,7 @@ public class Main
 					System.exit(1);
 				}
 				String[] langs = it.next().split(",");
-				for(String lang : langs)
-					strLanguages.add(lang);
+            strLanguages.addAll(Arrays.asList(langs));
 			}
 			else if(arg.equals("-ref"))
 			{
@@ -185,12 +182,21 @@ public class Main
 					System.exit(1);
 				}
 				String[] langs = it.next().split(",");
-				for(String lang : langs)
-					untransList.add(lang);
+            untransList.addAll(Arrays.asList(langs));
 			}
 			else if(arg.equals("-p"))
 				pretend = true;
-		}
+         else if(arg.equals("-enc"))
+			{
+				if(!it.hasNext())
+				{
+					System.out.println("You must specify the encoding.");
+					printUsage();
+					System.exit(1);
+				}
+				encoding = it.next().trim();
+         }
+      }
 		
 		//Let's see if everything was specified
 		if(root == null)
@@ -221,7 +227,7 @@ public class Main
 			printUsage();
 			System.exit(1);
 		}
-	}
+   }
 	
 	/**
 	 * Does the import-languages-into-tree stuff.
@@ -234,7 +240,8 @@ public class Main
 		importAction.setRoot(root);
 		importAction.setRefLang(strRefLang);
 		importAction.setPretend(pretend);
-		try
+      importAction.setEncoding(encoding);
+      try
 		{
 			importAction.doImport(System.out);
 		}
@@ -272,7 +279,8 @@ public class Main
 		exportAction.setSheetMap(sheetMap);
 		exportAction.setOutputFile(outputFile);
 		exportAction.setRefLang(strRefLang);
-		try
+      exportAction.setEncoding(encoding);
+      try
 		{
 			exportAction.export(System.out);
 		}

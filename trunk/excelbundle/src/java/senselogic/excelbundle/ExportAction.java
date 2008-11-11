@@ -16,20 +16,15 @@
 
 package senselogic.excelbundle;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.*;
 
 /**
  * Easy to use interface class for exporting Excel files.
@@ -48,9 +43,9 @@ public class ExportAction
 		Document doc = reader.read(sheetMapFile);
 		Element root = doc.getRootElement();
 		Iterator it = root.elements("mapping").iterator();
-		while(it.hasNext())
-		{
-			Element mapping = (Element)it.next();
+      for (Object o : root.elements("mapping"))
+      {
+			Element mapping = (Element)o;
 			sheetMap.put(mapping.getText(), mapping.attributeValue("name"));
 		}
 		
@@ -64,6 +59,7 @@ public class ExportAction
 	private File root;
 	private File outputFile;
 	private String strRefLang;
+   private String encoding;
 	
     // Public --------------------------------------------------------
 	public void setLanguages(List<String> strLanguages)
@@ -95,19 +91,25 @@ public class ExportAction
 	{
 		this.strRefLang = strRefLang;
 	}
-	
-	/**
+
+   public void setEncoding(String anEncoding)
+   {
+      encoding = anEncoding;
+   }
+
+   /**
 	 * Exports with the current settings.
 	 * 
 	 * @param out  what stream to print information to about the export, or 
 	 *             null if silenced
+    * @throws java.io.IOException
 	 */
 	public void export(PrintStream out) throws IOException
 	{
-		LanguageTreeIO tree = null;
+		LanguageTreeIO tree;
 		try
 		{
-			tree = new LanguageTreeIO(root, strRefLang);
+			tree = new LanguageTreeIO(root, strRefLang, encoding);
 		}
 		catch(IOException e)
 		{
