@@ -59,7 +59,6 @@ public class ExportAction
 	private File root;
 	private File outputFile;
 	private String strRefLang;
-   private String encoding;
 	
     // Public --------------------------------------------------------
 	public void setLanguages(List<String> strLanguages)
@@ -92,11 +91,6 @@ public class ExportAction
 		this.strRefLang = strRefLang;
 	}
 
-   public void setEncoding(String anEncoding)
-   {
-      encoding = anEncoding;
-   }
-
    /**
 	 * Exports with the current settings.
 	 * 
@@ -109,7 +103,7 @@ public class ExportAction
 		LanguageTreeIO tree;
 		try
 		{
-			tree = new LanguageTreeIO(root, strRefLang, encoding);
+			tree = new LanguageTreeIO(root, strRefLang);
 		}
 		catch(IOException e)
 		{

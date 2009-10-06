@@ -16,22 +16,21 @@
 
 package senselogic.excelbundle.test;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
+import junit.framework.TestCase;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-
 import senselogic.excelbundle.ExcelExporter;
 import senselogic.excelbundle.ExcelImporter;
 import senselogic.excelbundle.LanguageFile;
 import senselogic.excelbundle.LanguagePack;
-import junit.framework.TestCase;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 /**
- * TestCase for exporting and importing LanguagePacks to and form Excel files.
+ * TestCase for exporting and importing LanguagePacks to and from Excel files.
  *
  * @author Emil Eriksson
  * @version $Revision$
@@ -86,53 +85,53 @@ public class ExcelTest extends TestCase
 		HSSFRow r = sheet.getRow(0);
 		assertEquals(
 				bundle1,
-				r.getCell((short)0).getRichStringCellValue().getString());
+				r.getCell(0).getRichStringCellValue().getString());
 		r = sheet.getRow(1);
 		assertEquals(
 				"en",
-				r.getCell((short)1).getRichStringCellValue().getString());
+				r.getCell(1).getRichStringCellValue().getString());
 		assertEquals(
 				"sv",
-				r.getCell((short)2).getRichStringCellValue().getString());
+				r.getCell(2).getRichStringCellValue().getString());
 		r = sheet.getRow(2);
 		assertEquals(
 				"en1",
-				r.getCell((short)1).getRichStringCellValue().getString());
+				r.getCell(1).getRichStringCellValue().getString());
 		assertEquals(
 				"sv1",
-				r.getCell((short)2).getRichStringCellValue().getString());
+				r.getCell(2).getRichStringCellValue().getString());
 		r = sheet.getRow(3);
 		assertEquals(
 				"en2",
-				r.getCell((short)1).getRichStringCellValue().getString());
+				r.getCell(1).getRichStringCellValue().getString());
 		assertEquals(
 				"sv2",
-				r.getCell((short)2).getRichStringCellValue().getString());
+				r.getCell(2).getRichStringCellValue().getString());
 		r = sheet.getRow(5);
 		assertEquals(
 				bundle2,
-				r.getCell((short)0).getRichStringCellValue().getString());
+				r.getCell(0).getRichStringCellValue().getString());
 		r = sheet.getRow(6);
 		assertEquals(
 				"en",
-				r.getCell((short)1).getRichStringCellValue().getString());
+				r.getCell(1).getRichStringCellValue().getString());
 		assertEquals(
 				"sv",
-				r.getCell((short)2).getRichStringCellValue().getString());
+				r.getCell(2).getRichStringCellValue().getString());
 		r = sheet.getRow(7);
 		assertEquals(
 				"en3",
-				r.getCell((short)1).getRichStringCellValue().getString());
+				r.getCell(1).getRichStringCellValue().getString());
 		assertEquals(
 				"sv3",
-				r.getCell((short)2).getRichStringCellValue().getString());
+				r.getCell(2).getRichStringCellValue().getString());
 		r = sheet.getRow(8);
 		assertEquals(
 				"en4",
-				r.getCell((short)1).getRichStringCellValue().getString());
+				r.getCell(1).getRichStringCellValue().getString());
 		assertEquals(
 				"sv4",
-				r.getCell((short)2).getRichStringCellValue().getString());
+				r.getCell(2).getRichStringCellValue().getString());
 	}
 	
 	public void testExportImport() throws IOException

@@ -40,7 +40,6 @@ public class Main
 	private static List<String> strLanguages = new ArrayList<String>();
 	private static List<String> untransList = new ArrayList<String>();
 	private static boolean pretend = false;
-   private static String encoding = "ISO-8859-1";
 
    // Public --------------------------------------------------------
 	public static void main(String[] args)
@@ -118,6 +117,12 @@ public class Main
 					System.exit(1);
 				}
 				root = new File(it.next());
+
+                if (!root.exists())
+                {
+                    System.out.println("Root folder does not exist!");
+                    System.exit(1);
+                }
 			}
 			else if(arg.equals("-export"))
 			{
@@ -186,16 +191,6 @@ public class Main
 			}
 			else if(arg.equals("-p"))
 				pretend = true;
-         else if(arg.equals("-enc"))
-			{
-				if(!it.hasNext())
-				{
-					System.out.println("You must specify the encoding.");
-					printUsage();
-					System.exit(1);
-				}
-				encoding = it.next().trim();
-         }
       }
 		
 		//Let's see if everything was specified
@@ -240,7 +235,6 @@ public class Main
 		importAction.setRoot(root);
 		importAction.setRefLang(strRefLang);
 		importAction.setPretend(pretend);
-      importAction.setEncoding(encoding);
       try
 		{
 			importAction.doImport(System.out);
@@ -279,7 +273,6 @@ public class Main
 		exportAction.setSheetMap(sheetMap);
 		exportAction.setOutputFile(outputFile);
 		exportAction.setRefLang(strRefLang);
-      exportAction.setEncoding(encoding);
       try
 		{
 			exportAction.export(System.out);

@@ -16,15 +16,6 @@
 
 package senselogic.excelbundle;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -33,6 +24,15 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class for exporting LanguagePacks to Excel files.
@@ -207,25 +207,25 @@ public class ExcelExporter
 	private void createSheet(String sheetName, LanguagePack referencePack)
 	{
 		HSSFSheet sheet = wb.createSheet(sheetName);
-		sheet.setProtect(true);
+		sheet.protectSheet( "excelbundle" );
 		sheet.setDisplayGridlines(false);
 		sheet.createFreezePane( 1, 0, 1, 0 );
 		
 		//Set some column widths:
 		int numCols = langPacks.size() + 2;
 		for(short i = 0; i <= numCols; i++)
-			sheet.setColumnWidth(i, (short)10000);
+			sheet.setColumnWidth(i, 10000);
 		
 		//Now lets fill it with stuff
 		HSSFRow r;
 		HSSFCell c;
 		int rowIndex = 0;
-		short colIndex;
+		int colIndex;
 		for(LanguageFile refLangFile : referencePack.getLanguageFiles())
 		{
 			//Bundle path
 			r = sheet.createRow(rowIndex);
-			c = r.createCell((short)0);
+			c = r.createCell(0);
 			c.setCellStyle(bundlePathStyle);
 			c.setCellValue(new HSSFRichTextString(refLangFile.getPath()));
 			rowIndex++;
@@ -247,7 +247,7 @@ public class ExcelExporter
 			{
 				r = sheet.createRow(rowIndex);
 				r.setHeightInPoints(16);
-				c = r.createCell((short)0);
+				c = r.createCell(0);
 				c.setCellStyle(keyStyle);
 				c.setCellValue(new HSSFRichTextString(pair.getKey()));
 				

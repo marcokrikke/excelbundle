@@ -81,7 +81,7 @@
 		<jar jarfile="${dist.dir}/excelbundle.jar" compress="yes">
 			<fileset file="${basedir}/LICENSE.txt"/>
 			<fileset dir="${build.dir}/classes"/>
-			<zipfileset src="${src.dir}/lib/poi-3.0-alpha2-20060616.jar"/>
+			<zipfileset src="${src.dir}/lib/poi-3.5-FINAL-20090928.jar"/>
 			<zipfileset src="${src.dir}/lib/dom4j-1.6.1.jar"/>
 			<manifest>
 				<attribute name="Main-Class" value="senselogic.excelbundle.Main"/>
