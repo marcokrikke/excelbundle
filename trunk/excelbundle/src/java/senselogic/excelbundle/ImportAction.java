@@ -35,8 +35,7 @@ public class ImportAction
 	private File root;
 	private File inputFile;
 	private boolean pretend = false;
-   private String encoding;
-	
+
     // Public --------------------------------------------------------
 	public void setLanguages(List<String> strLanguages)
 	{
@@ -63,11 +62,6 @@ public class ImportAction
 		this.pretend = pretend;
 	}
 
-   public void setEncoding(String anEncoding)
-   {
-      encoding = anEncoding;
-   }
-
    /**
 	 * Import with the current settings.
 	 * 
@@ -80,7 +74,7 @@ public class ImportAction
 		LanguageTreeIO tree;
 		try
 		{
-			tree = new LanguageTreeIO(root, strRefLang, encoding);
+			tree = new LanguageTreeIO(root, strRefLang);
 		}
 		catch(IOException e)
 		{

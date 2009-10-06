@@ -16,14 +16,14 @@
 
 package senselogic.excelbundle.test;
 
-import java.io.File;
-import java.io.IOException;
-
+import junit.framework.TestCase;
 import senselogic.excelbundle.LanguageFile;
 import senselogic.excelbundle.LanguagePack;
 import senselogic.excelbundle.LanguageTreeIO;
 import senselogic.excelbundle.Merger;
-import junit.framework.TestCase;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * TestCase for Merger.
@@ -75,7 +75,7 @@ public class MergerTest extends TestCase
 			langFile2.setValue("foo3", "bar4");
 			expect.addLanguageFile(langFile2);
 			
-			LanguageTreeIO tree = new LanguageTreeIO(root, "en", "ISO-8859-1");
+			LanguageTreeIO tree = new LanguageTreeIO(root, "en");
 			tree.save(en.getLanguageFile("/foobar1"));
 			tree.save(en.getLanguageFile("/foobar2"));
 			tree.save(sv.getLanguageFile("/foobar1"));

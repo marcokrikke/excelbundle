@@ -16,17 +16,17 @@
 
 package senselogic.excelbundle;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 
 /**
@@ -94,7 +94,7 @@ public class ExcelImporter
     	while(it.hasNext())
     	{
     		HSSFRow r = it.next();
-    		HSSFCell c = r.getCell((short)0);
+    		HSSFCell c = r.getCell(0);
     		
     		String value = getString(c);
     		if((value.charAt(0) != '/') && (value.charAt(0) != '\\'))
@@ -106,7 +106,7 @@ public class ExcelImporter
     		if(!it.hasNext())
     			break;
     		r = it.next();
-    		short valueCol = getIndexOf(r, language);
+    		int valueCol = getIndexOf(r, language);
     		//Skip to next if the language isn't included in this bundle
     		if(valueCol < 0)
     			continue;
@@ -116,7 +116,7 @@ public class ExcelImporter
     		while(it.hasNext())
     		{
     			r = it.next();
-    			String firstCell = getString(r.getCell((short)0));
+    			String firstCell = getString(r.getCell(0));
     			if(firstCell == null)
     				continue;
     			
@@ -159,10 +159,10 @@ public class ExcelImporter
 	 * Returns the first index of the specified value on the row or -1 if there
 	 * is no such value.
 	 */
-	private short getIndexOf(HSSFRow r, String value)
+	private int getIndexOf(HSSFRow r, String value)
 	{
 		short lastCell = r.getLastCellNum();
-		for(short i = 1; i <= lastCell; i++)
+		for(int i = 1; i <= lastCell; i++)
 		{
 			String rowValue = getString(r.getCell(i));
 			if(value.equals(rowValue))
